@@ -1,6 +1,6 @@
 &input1
   natom = 1000
-  nstep_total   =         2
+  nstep_total   =         5
   dump_ene_step =         1
   dump_step     =         1
 &end

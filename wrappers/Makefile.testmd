@@ -1,0 +1,26 @@
+# Makefile
+
+#gfortran
+FC= mpif90
+FFLAGS = -g -pg -Wall  -lstdc++  -lgomp -ltbb -lmpi_cxx
+
+TARGET = sample.exe
+OBJS =  sample.o sub.o wrapper.c
+LIBS = libmd_distributed.a
+
+.SUFFIXES:.f90
+
+$(TARGET): $(OBJS)
+	$(FC)  -o $(TARGET) $(OBJS) $(LIBS) $(FFLAGS) 
+
+.f90.o:
+	$(FC) -c $(FFLAGS) $< -o $@ 
+
+.f90.mod:
+	$(FC) -c $(FFLAGS) $< -o $@ 
+
+clean:
+	rm *.o *.mod *genmod*
+	$(RM) $(TARGET) $(OBJS)  $(OBJS:.o=.mod)
+	$(RM) core gmon.out *~ #*#
+
