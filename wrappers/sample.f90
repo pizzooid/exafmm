@@ -89,7 +89,6 @@ program main
     
     if( mod(nstep , 10) .eq. 1)then
       call check_bounds(natom , nsize , res_index1 , x1 , box_length)
-      call check_bounds(ni    , nsize , res_index2 , x2 , box_length)
     endif
 
     ! 3, calc force
@@ -99,6 +98,7 @@ program main
     
     ! exafmm api start
     if( mod(nstep, 2) .eq. 1)then
+      call check_bounds(ni    , nsize , res_index2 , x2 , box_length)
       nj = nsize
       call fmm_partition_wrapper(ni, nj , res_index2, x2, q, v2, box_length)
     endif
